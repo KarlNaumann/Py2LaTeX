@@ -26,9 +26,9 @@ class latexTable:
         self.output.append('\\begin{tabular}{%s}'%(r))
         
     def _makeSidewaysHeader(self,index,title,label,cols,tpt=False):
-        self.output.append('\\being\{sidewaystable\}')
+        self.output.append('\\being{sidewaystable}')
         self.output.append('\\centering')
-        self.output.append('\\scalebox\{0.6\}{')
+        self.output.append('\\scalebox{0.6}{')
         if tpt: self.output.append('\\begin{threeparttable}')
         self.output.append('\\caption{%s} \\label{%s}'%(title,label))
         r = ''.join(['r' for x in cols])
@@ -63,19 +63,19 @@ class latexTable:
     
     def _endTable(self,threeparttable,sidewaystable):
         if threeparttable:
-            self.output.append('\\begin\{tablenotes\}')
-            self.output.append('\\end\{tablenotes\}')
-            self.output.append('\\end\{threeparttable\}')
+            self.output.append('\\begin{tablenotes}')
+            self.output.append('\\end{tablenotes}')
+            self.output.append('\\end{threeparttable}')
         if sidewaystable:
             self.output.append('}')
-            self.output.append('\\end\{sidewaystable\}')
+            self.output.append('\\end{sidewaystable}')
             
         self.output.append('\\end{table}')
         
-    def export(label):
+    def export(self,label):
         """Export dataframe as latex file to use easily. 
         Require file name, e.g. 'tab:results' with or with .tex to end"""
-        if label[-4:]!='.tex':label+'.tex'
+        if label[-4:]!='.tex':label=label+'.tex'
         with open(label,'w') as f:
             f.write('\n'.join(self.output))
             f.close()
