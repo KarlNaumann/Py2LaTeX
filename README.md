@@ -31,10 +31,10 @@ sideways | Boolean | Will generate a sideways facing table with default scalebox
 This function takes a `String` label representing the desired filename for the .tex file. The function automatically adds .tex if not included in the filename. Exports to the current project directory
 
 ## To Be Added
-- [] Raising errors and checks
-- [] For regression results having *** for the p-values (perhaps a child class for OLS results)
-- [] Child class for statsmodels OLS results
-- [] Bold formatting for the titles
+- [ ] Raising errors and checks
+- [ ] For regression results having *** for the p-values (perhaps a child class for OLS results)
+- [ ] Child class for statsmodels OLS results
+- [ ] Bold formatting for the titles
 
 ## Authors
 
