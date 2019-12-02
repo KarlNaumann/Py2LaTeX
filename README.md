@@ -16,7 +16,7 @@ Class LatexTable(df,title,label,columns=None,index=True,ixTitle=None,precision=3
 ```
 
 Parameter | Type | Description
------------------------------
+----------|------|-------------
 df | pd.DataFrame | DataFrame containing the data for the table, ideally with the index and columns already as desired (required)
 title | string | Title of the desired Table (required)
 label | string | Label for the desired Table (required)
