@@ -9,11 +9,11 @@ class latexTable:
     
     def __init__(self,df,title,label,columns=None,index=True,ixTitle=None,precision=3,threeparttable=False,sideways=False):
         self.output=[]
-        if not columns: columns = df.columns
+        if columns==None: columns = df.columns
         if sideways:
                 self._makeSidewaysHeader(index,title,label,columns,tpt=threeparttable)
         else: self._makeHeaderReg(index,title,label,df.shape[1])
-        self._makeColHeader(columns)
+        self._makeColHeader(columns,ixTitle)
         self._fillTable(df,index,precision)
         self._endTable(threeparttable,sideways)
     
@@ -32,18 +32,18 @@ class latexTable:
         if tpt: self.output.append('\\begin{threeparttable}')
         self.output.append('\\caption{%s} \\label{%s}'%(title,label))
         r = ''.join(['r' for x in cols])
-        if index: r = 'l'+r
+        if index is not None: r = 'l'+r
         self.output.append('\\begin{tabular}{%s}'%(r))
         
     def _makeColHeader(self, columns,ixTitle):
         """Adds the column headings - can be specified extra
         requires: column headings"""
         self.output.append('\\toprule')
-        if columns:
+        if columns is not None:
             header = ''.join(['{%s & }'%col for col in columns])
         else:
             header = ''.join(['{%s & }'%col for col in self.df.columns])
-        if ixTitle: header = '{%s} &'%indexTitle + header + '\\\\'
+        if ixTitle is not None: header = '{%s} &'%ixTitle + header + '\\\\'
         self.output.append(header)
         self.output.append('\\midrule')
     
