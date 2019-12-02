@@ -38,4 +38,4 @@ This function takes a `String` label representing the desired filename for the .
 
 ## Authors
 
-* **Karl Naumann** - [PurpleBooth](https://github.com/karlnaumann)
+* **Karl Naumann** - [GitHub](https://github.com/karlnaumann)
