@@ -7,16 +7,29 @@ import pandas as pd
 class latexTable:
     '''Class to control the threeparttable'''
     
-    def __init__(self,df,title,label,columns=None,index=True,ixTitle=None,precision=3,threeparttable=False):
+    def __init__(self,df,title,label,columns=None,index=True,ixTitle=None,precision=3,threeparttable=False,sideways=False):
         self.output=[]
-        self._makeHeader(index,title,label,df.shape[1])
         if not columns: columns = df.columns
+        if sideways:
+                self._makeSidewaysHeader(index,title,label,columns,tpt=threeparttable)
+        else: self._makeHeaderReg(index,title,label,df.shape[1])
         self._makeColHeader(columns)
-        self._fillTable(self,df,index,precision)
+        self._fillTable(df,index,precision)
+        self._endTable(threeparttable,sideways)
     
-    def _makeHeader(self,index,title,label,cols):
+    def _makeHeaderReg(self,index,title,label,cols):
         self.output.append('\\begin{table}[H]')
         self.output.append('\\centering')
+        self.output.append('\\caption{%s} \\label{%s}'%(title,label))
+        r = ''.join(['r' for x in cols])
+        if index: r = 'l'+r
+        self.output.append('\\begin{tabular}{%s}'%(r))
+        
+    def _makeSidewaysHeader(self,index,title,label,cols,tpt=False):
+        self.output.append('\\being\{sidewaystable\}')
+        self.output.append('\\centering')
+        self.output.append('\\scalebox\{0.6\}{')
+        if tpt: self.output.append('\\begin{threeparttable}')
         self.output.append('\\caption{%s} \\label{%s}'%(title,label))
         r = ''.join(['r' for x in cols])
         if index: r = 'l'+r
@@ -47,6 +60,16 @@ class latexTable:
         #End of table format
         self.output.append('\\bottomrule')
         self.output.append('\\end{tabular}')  
+    
+    def _endTable(self,threeparttable,sidewaystable):
+        if threeparttable:
+            self.output.append('\\begin\{tablenotes\}')
+            self.output.append('\\end\{tablenotes\}')
+            self.output.append('\\end\{threeparttable\}')
+        if sidewaystable:
+            self.output.append('}')
+            self.output.append('\\end\{sidewaystable\}')
+            
         self.output.append('\\end{table}')
         
     def export(label):
