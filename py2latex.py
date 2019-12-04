@@ -26,7 +26,7 @@ class latexTable:
         self.output.append('\\begin{tabular}{%s}'%(r))
         
     def _makeSidewaysHeader(self,index,title,label,cols,tpt=False):
-        self.output.append('\\being{sidewaystable}')
+        self.output.append('\\begin{sidewaystable}')
         self.output.append('\\centering')
         self.output.append('\\scalebox{0.6}{')
         if tpt: self.output.append('\\begin{threeparttable}')
@@ -40,11 +40,11 @@ class latexTable:
         requires: column headings"""
         self.output.append('\\toprule')
         if columns is not None:
-            header = ''.join(['{%s & }'%col for col in columns])
+            header = ''.join(['{%s} & '%col for col in columns])
         else:
-            header = ''.join(['{%s & }'%col for col in self.df.columns])
-        if ixTitle is not None: header = '{%s} &'%ixTitle + header + '\\\\'
-        self.output.append(header)
+            header = ''.join(['{%s} & '%col for col in self.df.columns])
+        if ixTitle is not None: header = '{%s} &'%ixTitle + header
+        self.output.append(headerheader[:-2] + '\\\\')
         self.output.append('\\midrule')
     
     def _fillTable(self,df,index,precision):
@@ -64,13 +64,13 @@ class latexTable:
     def _endTable(self,threeparttable,sidewaystable):
         if threeparttable:
             self.output.append('\\begin{tablenotes}')
+            self.output.append('\\item')
             self.output.append('\\end{tablenotes}')
             self.output.append('\\end{threeparttable}')
         if sidewaystable:
             self.output.append('}')
             self.output.append('\\end{sidewaystable}')
-            
-        self.output.append('\\end{table}')
+        else: self.output.append('\\end{table}')
         
     def export(self,label):
         """Export dataframe as latex file to use easily. 
