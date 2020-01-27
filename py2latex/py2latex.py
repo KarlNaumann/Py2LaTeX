@@ -12,14 +12,15 @@ class latexTable:
         if columns==None: columns = df.columns
         if sideways:
                 self._makeSidewaysHeader(index,title,label,columns,tpt=threeparttable)
-        else: self._makeHeaderReg(index,title,label,df.columns.to_list())
+        else: self._makeHeaderReg(index,title,label,df.columns.to_list(),tpt=threeparttable)
         self._makeColHeader(columns,ixTitle)
         self._fillTable(df,index,precision)
         self._endTable(threeparttable,sideways)
     
-    def _makeHeaderReg(self,index,title,label,cols):
+    def _makeHeaderReg(self,index,title,label,cols,tpt):
         self.output.append('\\begin{table}[H]')
         self.output.append('\\centering')
+        if tpt: self.output.append('\\begin{threeparttable}')
         self.output.append('\\caption{%s} \\label{%s}'%(title,label))
         r = ''.join(['r' for x in cols])
         if index: r = 'l'+r
@@ -44,6 +45,7 @@ class latexTable:
         else:
             header = ''.join(['{%s} & '%col for col in self.df.columns])
         if ixTitle is not None: header = '{%s} &'%ixTitle + header
+        else: header = '&'+header
         self.output.append(header[:-2] + '\\\\')
         self.output.append('\\midrule')
     
