@@ -1,9 +1,0 @@
-README.md
-setup.py
-py2latex/__init__.py
-py2latex/py2latex.py
-py2latex.egg-info/PKG-INFO
-py2latex.egg-info/SOURCES.txt
-py2latex.egg-info/dependency_links.txt
-py2latex.egg-info/requires.txt
-py2latex.egg-info/top_level.txt
