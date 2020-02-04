@@ -35,6 +35,9 @@ This function takes a `String` label representing the desired filename for the .
 - [ ] For regression results having *** for the p-values (perhaps a child class for OLS results)
 - [ ] Child class for statsmodels OLS results
 - [ ] Bold formatting for the titles
+- [ ] Support for Multi-columns
+- [ ] Function for Arrays in equations
+- [ ] Function to generate the relevant settings e.g. \usepackage{ctable} etc.
 
 ## Authors
 
