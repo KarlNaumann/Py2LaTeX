@@ -8,8 +8,9 @@ from collections import Counter
 class latexTable:
     '''Class to control the threeparttable'''
 
-    def __init__(self,df,title,label,columns=None,index=True,ixTitle=None,precision=3,threeparttable=False,sideways=False):
+    def __init__(self,df,title,label,columns=None,index=True,ixTitle=None,precision=3,threeparttable=False,sideways=False,nanfill=''):
         self.output=[]
+        self.nanfill=nanfill
         if columns==None: columns = df.columns
         if sideways:
                 self._makeSidewaysHeader(index,title,label,columns,tpt=threeparttable)
@@ -96,12 +97,15 @@ class latexTable:
 
     def _fillTable(self,df,index,precision):
         """Fill the table with data from the dataframe"""
+        nans = df.isna()
         for i in range(df.shape[0]):
             newrow =''
             if index: newrow+='\\textbf{%s} & '%df.index[i]
             for j in range(df.shape[1]):
-                val = df.iloc[i,j]
-                if precision is not None: val = round(val, precision)
+                if nans.iloc[i,j]:val=self.nanfill
+                else:
+                    val = df.iloc[i,j]
+                    if precision is not None: val = round(val, precision)
                 newrow+='{} & '.format(val)
             self.output.append(newrow[:-2] + '\\\\')
         #End of table format
