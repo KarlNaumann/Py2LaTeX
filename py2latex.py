@@ -165,6 +165,7 @@ class latexTable:
 		self.output.append('\\end{tabular}')
 
 	def _endTable(self,threeparttable,sidewaystable):
+		"""End of table additions"""
 		if threeparttable:
 			self.output.append('\\begin{tablenotes}')
 			self.output.append('\\item')
@@ -186,3 +187,27 @@ class latexTable:
 		with open(filepath,'w') as f:
 			f.write('\n'.join(self.output))
 			f.close()
+
+class latexPlot:
+	"""Proposed class to export matplotlib plots to latex"""
+	def __init__(self,plotObject):
+		pass
+
+	def generateFramework(self):
+		"""Build the figure environment and add the figure"""
+		pass
+
+	def export(self,filePath):
+		"""Export a tex file that contains the environment"""
+		pass
+
+class regressionTable:
+	"""Takes statsmodels OLS output and converts to table"""
+	def __init__(self,resultsObject,columns,properties):
+
+		# Input checks
+		pass
+
+	def generateDataFrame(self):
+
+		pass
