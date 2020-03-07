@@ -1,0 +1,69 @@
+\ProvidesPackage{settings}
+
+% Packages used in the document
+\usepackage{ctable}
+\renewcommand{\tnote}{\relax}
+\usepackage{booktabs}
+\usepackage{amssymb, amsmath}
+\usepackage{apacite}
+\usepackage{appendix}
+\usepackage{colortbl}
+\usepackage{blindtext}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{threeparttable}
+\usepackage{titlesec}
+\usepackage[labelfont = {bf}]{caption}
+\usepackage{array}
+\usepackage{subcaption}
+\usepackage{nameref}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{bbm} 
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{mathtools}
+\usepackage{breqn}
+\usepackage{natbib}
+\usepackage[bottom]{footmisc}
+\usepackage{dcolumn}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{bbm}
+\usepackage{tocloft}
+\usepackage{multicol}
+\usepackage{dblfloatfix}
+\usepackage{siunitx}
+\usepackage{tcolorbox}
+
+\setlength\cftparskip{-1pt}
+\setlength\cftbeforesecskip{5pt}
+\setlength\cftaftertoctitleskip{2.2pt}
+
+% User created commands
+\newcommand{\subscript}[2]{$#1 _ #2$}
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
+\newcommand{\mr}[3]{\multirow{#1}{#2}{#3}}
+\newcommand{\mrt}[3]{\multirow[t]{#1}{#2}{#3}}
+\newcommand{\abs}[1]{\mathopen|#1\mathclose|}
+\newcommand{\varD}[1]{{\operatorname{#1}}}
+\newcommand{\varIt}[1]{{\operatorname{\mathit{#1}}}}
+\newcommand{\sigT}[1]{\ensuremath{\sigma^{2}_{#1}}}
+%\newcommand{\comment}[1]{}
+\newcommand{\se}[1]{\tiny{({#1})}}
+\newcommand{\lrt}[1]{\tiny{[{#1}]}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+
+\renewcommand{\arraystretch}{1.2}
+\definecolor{grey}{gray}{0.8}
+
+% Reformatting of the titles of sections
+\usepackage{sectsty}
+\sectionfont{\large\selectfont}
+\subsectionfont{\normalsize\selectfont}
