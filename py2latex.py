@@ -48,6 +48,7 @@ class latexTable:
 		self.output=[]
 
 		# Setup given parameters
+		self.df = df
 		self.title = title
 		self.label = label
 		self.index = index
@@ -64,11 +65,11 @@ class latexTable:
 		if isinstance(df.columns,pd.core.indexes.multi.MultiIndex):
 		    self._makeMultiColHeader()
 		    self.multicols = True
-		else: self._makeColHeader(columns,ixTitle)
+		else: self._makeColHeader()
 
 		# Generate table
-		self._fillTable(df,index,precision)
-		self._endTable(threeparttable,sideways)
+		self._fillTable()
+		self._endTable()
 
 		# Generate package requirements
 		self.requirements = self._makeRequirements()
@@ -147,31 +148,31 @@ class latexTable:
 		if self.ixTitle is not None: self.output[-1] = '{%s} &'%self.ixTitle + self.output[-1][1:]
 		self.output.append('\\midrule')
 
-	def _fillTable(self,df,index,precision):
+	def _fillTable(self):
 		"""Fill the table with data from the dataframe"""
-		nans = df.isna()
-		for i in range(df.shape[0]):
+		nans = self.df.isna()
+		for i in range(self.df.shape[0]):
 			newrow =''
-			if index: newrow+='\\textbf{%s} & '%df.index[i]
-			for j in range(df.shape[1]):
+			if self.index: newrow+='\\textbf{%s} & '%self.df.index[i]
+			for j in range(self.df.shape[1]):
 				if nans.iloc[i,j]: val=self.nanfill
 				else:
-					val = df.iloc[i,j]
-					if precision is not None: val = round(val, precision)
+					val = self.df.iloc[i,j]
+					if self.precision is not None: val = round(val, self.precision)
 				newrow+='{} & '.format(val)
 			self.output.append(newrow[:-2] + '\\\\')
 		#End of table format
 		self.output.append('\\bottomrule')
 		self.output.append('\\end{tabular}')
 
-	def _endTable(self,threeparttable,sidewaystable):
+	def _endTable(self):
 		"""End of table additions"""
-		if threeparttable:
+		if self.threeparttable:
 			self.output.append('\\begin{tablenotes}')
 			self.output.append('\\item')
 			self.output.append('\\end{tablenotes}')
 			self.output.append('\\end{threeparttable}')
-		if sidewaystable:
+		if self.sideways:
 			self.output.append('}')
 			self.output.append('\\end{sidewaystable}')
 		else: self.output.append('\\end{table}')
